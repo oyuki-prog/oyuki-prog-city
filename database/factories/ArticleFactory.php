@@ -34,7 +34,7 @@ class ArticleFactory extends Factory
             'city_name' => $this->faker->city(),
             'category_id' => rand(1, 6),
             'body' => $this->faker->paragraph(),
-            'bg_img_path' => 'bg-image/' . $fileName,
+            'bg_img_path' => 'bg_image/' . $fileName,
         ];
     }
 }

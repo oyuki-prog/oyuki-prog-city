@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'prefecture_id' => rand(1, 47),
             'self_intro' => $this->faker->paragraph(),
-            'avatar_path' => 'avatar_img/' . $fileName,
+            'avatar_path' => 'avatar_image/' . $fileName,
             'remember_token' => Str::random(10),
         ];
     }
