@@ -19,6 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedTinyInteger('prefecture_id')->nullable();
+            $table->foreign('prefecture_id')
+                ->references('id')->on('prefectures')
+                ->onDelete('restrict');
+            $table->text('self_intro')->nullable();
+            $table->string('avatar_path')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -31,6 +37,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_prefecture_id_foreign');
+            $table->dropIfExists('users');
+        });
     }
 }

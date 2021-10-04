@@ -15,7 +15,8 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
+            $table->string('img_path');
         });
     }
 
@@ -26,6 +27,9 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::table('images', function (Blueprint $table) {
+            $table->dropForeign('images_article_id_foreign');
+            $table->dropIfExists('images');
+        });
     }
 }
