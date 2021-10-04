@@ -10,4 +10,9 @@ class Image extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function article()
+    {
+        $this->belongsTo(Article::class);
+    }
 }

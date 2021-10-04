@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Prefecture extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        $this->hasMany(User::class);
+    }
+
+    public function articles()
+    {
+        $this->hasMany(Article::class);
+    }
 }
