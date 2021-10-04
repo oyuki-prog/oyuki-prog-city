@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -22,11 +23,18 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $fileName = time() . rand(1, 10000) . '.jpg';
+        $file = UploadedFile::fake()->image($fileName);
+        $target_path = storage_path('app/public/avatar_image');
+        $file->move($target_path, $fileName);
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'prefecture_id' => rand(1, 47),
+            'self_intro' => $this->faker->paragraph(),
+            'avatar_path' => 'avatar_img/' . $fileName,
             'remember_token' => Str::random(10),
         ];
     }
