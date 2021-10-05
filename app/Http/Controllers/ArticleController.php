@@ -99,6 +99,11 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $user = Auth::user();
+        if ($user->id != $article->user_id) {
+            return redirect()->route('articles.index');
+        }
+
         $categories = Category::all();
         $prefectures = Prefecture::all();
         return view('articles.edit', compact('article', 'categories', 'prefectures'));
