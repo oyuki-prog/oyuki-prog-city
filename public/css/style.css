@@ -28,10 +28,14 @@
 }
 
 .article-images {
-    margin-top: 50px;
+    margin: 50px 30px 50px 0;
     height: 250px;
+    padding-bottom: 15px;
+    overflow: hidden;
     overflow-x: auto;
     white-space: nowrap;
+    /* pointer-events: none; */
+    user-select: none;
 }
 
 .article-image {

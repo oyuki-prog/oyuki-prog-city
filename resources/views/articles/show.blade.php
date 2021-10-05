@@ -3,6 +3,7 @@
 @section('title', ' | 記事詳細')
 
 @section('style')
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
         .wallpaper {
             background: no-repeat url({{ $url }}) center center/cover;
@@ -18,19 +19,23 @@
                 <div class="py-5 w-100">
                     <div class="d-flex align-items-center">
                         <img src="{{ Storage::url($article->user->avatar_path) }}" class="avatar">
-                        <a class="font-weight-bold" href="">{{ $article->user->name }}</a>による記事
-                    </div>
-                    <h2 class="d-block py-3 display-4">{{ $article->title }}</h2>
-                        <p>
-                            {{ $article->prefecture->name }}
-                            {{ $article->city_name }}
-                            {{ $article->category->name }}
-                        </p>
-                    @if ($article->created_at == $article->updated_at)
-                        <p>{{ date('Y年n月j日', strtotime($article->created_at)) }}に作成</p>
+                        <a class="font-weight-bold d-inline-block pr-2" href="">{{ $article->user->name }}</a>が
+                        @if ($article->created_at == $article->updated_at)
+                        {{ date('Y年n月j日', strtotime($article->created_at)) }}に作成
                     @else
-                        <p>{{ date('Y年n月j日', strtotime($article->updated_at)) }}に更新</p>
+                        {{ date('Y年n月j日', strtotime($article->updated_at)) }}に更新
                     @endif
+                    </div>
+                    <div class="display-4">
+                        {{ $article->title }}
+                    </div>
+                    <p class="mb-1 d-inline-block">
+                        場所：{{ $article->prefecture->name }}
+                        {{ $article->city_name }}
+                    </p>
+                    <p>
+                        カテゴリー：{{ $article->category->name }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -45,7 +50,7 @@
         @endif
     </div>
 
-    <div class="container py-5 article-body">
+    <div class="container pb-5 article-body">
         <p> {{ $article->body }} </p>
     </div>
 @endsection
