@@ -52,7 +52,18 @@
         </div>
     @endif
 
-    <div class="container py-3 article-body">
+    <div class="container py-3">
         <p> {{ $article->body }} </p>
+        @if ($article->user_id == $user->id)
+            <div class="d-flex justify-content-end">
+                <form action="{{ route('articles.destroy', $article) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger rounded-pill py-3 d-block ml-auto" onclick="if(!confirm('本当に削除していいですか？')){return false}">削除する</button>
+                </form>
+                <button type="button" class="btn btn-primary rounded-pill py-3 d-block ml-2" onclick="location.href='{{ route('articles.edit', $article) }}'">編集する</button>
+            </div>
+        @endif
     </div>
+
 @endsection

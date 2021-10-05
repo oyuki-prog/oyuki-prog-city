@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Prefecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
@@ -45,7 +46,7 @@ class ArticleController extends Controller
     {
         //メイン画像の保存処理
         if ($file = $request->bg_img_path) {
-            $fileName = $file->getClientOriginalName();
+            $fileName = time() . $file->getClientOriginalName();
             $target_path = storage_path('app/public/bg_image');
             $file->move($target_path, $fileName);
         }
@@ -61,7 +62,7 @@ class ArticleController extends Controller
         //画像リストの保存処理
         if ($files = $request->file('img_path')) {
             foreach ($files as $file) {
-                $fileName = $file->getClientOriginalName();
+                $fileName = time() . $file->getClientOriginalName();
                 $target_path = storage_path('app/public/article_image');
                 $file->move($target_path, $fileName);
 
@@ -85,8 +86,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $user = Auth::user();
         $url = Storage::url($article->bg_img_path);
-        return view('articles.show', compact('article', 'url'));
+        return view('articles.show', compact('article', 'url', 'user'));
     }
 
     /**
@@ -97,7 +99,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $categories = Category::all();
+        $prefectures = Prefecture::all();
+        return view('articles.edit', compact('article', 'categories', 'prefectures'));
     }
 
     /**
@@ -107,9 +111,46 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $article->fill($request->all());
+
+        //メイン画像の保存処理
+        if ($file = $request->bg_img_path) {
+            $fileName = time() . $file->getClientOriginalName();
+            $target_path = storage_path('app/public/bg_image');
+            $file->move($target_path, $fileName);
+            $article->bg_img_path = 'bg_image/' . $fileName;
+        }
+
+        $user = Auth::user();
+
+        $article->user_id = $user->id;
+        $article->save();
+
+        //画像リストの保存処理
+        if ($files = $request->file('img_path')) {
+            foreach ($article->images as $image) {
+                $pathdelete = storage_path('app/public/') . $image->img_path;
+                File::delete($pathdelete);
+                $image = Image::find($image->id);
+                $image->delete();
+            }
+
+            foreach ($files as $file) {
+                $fileName = time() . $file->getClientOriginalName();
+                $target_path = storage_path('app/public/article_image');
+                $file->move($target_path, $fileName);
+
+                //新たな画像レコードを作成
+                $image = new Image();
+                $image->article_id = $article->id;
+                $image->img_path = 'article_image/' . $fileName;
+                $image->save();
+            }
+        }
+
+        return redirect()->route('articles.show', $article);
     }
 
     /**
