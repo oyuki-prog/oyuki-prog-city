@@ -50,6 +50,8 @@
     object-fit: contain;
 }
 
-textarea {
-    height: 300px;
+.required {
+    color: white;
+    background-color: red;
+    width: 100px;
 }

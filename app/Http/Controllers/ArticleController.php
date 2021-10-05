@@ -18,9 +18,20 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::paginate(10);
+        $keyword = $request->input('keyword');
+        $query = Article::query();
+
+        $articles = $query->orderBy('updated_at','desc')->paginate(10);
+
+        if ($keyword)
+        {
+            $query->where('title', 'like', '%' . $keyword . '%')
+                ->orWhere('body', 'like', '%' . $keyword . '%');
+            $articles = $query->orderBy('created_at', 'desc')->paginate(10);
+        }
+
         return view('articles.index', compact('articles'));
     }
 

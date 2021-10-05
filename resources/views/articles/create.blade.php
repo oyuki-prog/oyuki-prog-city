@@ -3,7 +3,7 @@
 @section('title', ' | 新規記事作成')
 
 @section('content')
-    <div class="container pt-3">
+    <div class="container py-3">
 
         <form action="{{ route('articles.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
@@ -52,7 +52,7 @@
                 <textarea name="body" id="body" class="form-control">{{ old('body') }}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary text-white font-weight-bold">投稿</button>
+            <button type="submit" class="btn btn-primary text-white font-weight-bold d-block ml-auto">投稿</button>
         </form>
     </div>
 @endsection

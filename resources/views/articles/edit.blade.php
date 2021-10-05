@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', ' | 新規記事作成')
+@section('title', ' | 記事編集')
 
 @section('style')
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-    <div class="container pt-3">
+    <div class="container py-3">
 
         <form action="{{ route('articles.update', $article) }}" enctype="multipart/form-data" method="POST">
             @csrf
@@ -78,7 +78,7 @@
                 <textarea name="body" id="body" class="form-control">{{ old('body', $article->body) }}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary text-white font-weight-bold">投稿</button>
+            <button type="submit" class="btn btn-success text-white font-weight-bold d-block ml-auto">更新</button>
         </form>
     </div>
 @endsection
