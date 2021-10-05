@@ -10,8 +10,9 @@
                 <img src="{{ Storage::url($article->bg_img_path) }}" class="main-img">
             </div>
             <div class="w-75 pl-3 align-middle">
-                <div>
-                    {{ $article->user->name }}による記事
+                <div class="d-flex align-items-center">
+                    <img src="{{ Storage::url($article->user->avatar_path) }}" class="avatar">
+                    <a class="font-weight-bold" href="">{{ $article->user->name }}</a>による記事
                 </div>
                 <div class="h2">
                     <a class="d-block py-2" href="{{ route('articles.show', $article) }}">{{ $article->title }}</a>

@@ -23,4 +23,9 @@ class Article extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function prefecture()
+    {
+        return $this->belongsTo(Prefecture::class);
+    }
 }
