@@ -52,7 +52,7 @@
             </form>
         @endif
         @if (!empty($user->articles[0]))
-            <p class="h3 d-block mt-5">{{ $user->name }} さんの記事一覧</p>
+            <p class="h3 d-block mt-5 margin">{{ $user->name }} さんの記事一覧</p>
             @foreach ($user->articles as $article)
                 <div class="mb-3 shadow d-flex align-items-center">
                     <div class="img-area d-flex justify-content-center align-items-center">
