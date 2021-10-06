@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-<div class="container mt-3">
-    <div class="row justify-content-center">
+<div class="container pt-5">
+    <div class="row justify-content-center pt-5">
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>

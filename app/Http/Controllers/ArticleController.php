@@ -20,19 +20,26 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->input('keyword');
         $query = Article::query();
+        $prefectures = Prefecture::all();
+        $categories = Category::all();
 
         $articles = $query->orderBy('updated_at','desc')->paginate(10);
 
-        if ($keyword)
+        if ($request->input('keyword'))
         {
+            $keyword = $request->input('keyword');
             $query->where('title', 'like', '%' . $keyword . '%')
-                ->orWhere('body', 'like', '%' . $keyword . '%');
+                ->orWhere('body', 'like', '%' . $keyword . '%')
+                ->orWhere('city_name', 'like', $keyword . '%')
+                ->orWhereHas('prefecture', function ($query) use ($keyword) {
+                    $query->where('name', 'like', $keyword . '%');
+                });
             $articles = $query->orderBy('created_at', 'desc')->paginate(10);
+            return view('articles.index', compact('articles', 'keyword', 'prefectures', 'categories'));
         }
 
-        return view('articles.index', compact('articles'));
+        return view('articles.index', compact('articles', 'prefectures', 'categories'));
     }
 
     /**
@@ -55,19 +62,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $article = new Article();
+
         //メイン画像の保存処理
         if ($file = $request->bg_img_path) {
             $fileName = time() . $file->getClientOriginalName();
             $target_path = storage_path('app/public/bg_image');
             $file->move($target_path, $fileName);
+            $article->bg_img_path ='bg_image/' . $fileName;
         }
 
-        $user = Auth::user();
-
-        $article = new Article();
         $article->fill($request->all());
         $article->user_id = $user->id;
-        $article->bg_img_path ='bg_image/' . $fileName;
         $article->save();
 
         //画像リストの保存処理
@@ -179,5 +186,37 @@ class ArticleController extends Controller
     {
         $article->delete();
         return redirect('/articles');
+    }
+
+    public function category($id)
+    {
+        $prefectures = Prefecture::all();
+        $categories = Category::all();
+        $category = Category::find($id);
+        $header = $category->name;
+        $query = Article::query();
+        $query->where('category_id', $id);
+        $articles = $query->orderBy('created_at', 'desc')->paginate(10);
+        return view('articles.index', compact('articles', 'header', 'prefectures', 'categories'));
+    }
+
+    public function area($prefecture_id, $city_name)
+    {
+        $prefectures = Prefecture::all();
+        $categories = Category::all();
+        $query = Article::query();
+        $prefecture = Prefecture::find($prefecture_id);
+
+        if ($city_name != 1){
+            $header = $prefecture->name . ' ' . $city_name;
+            $query->where('prefecture_id', $prefecture_id)
+            ->where('city_name', 'like', $city_name . '%');
+        } else {
+            $header = $prefecture->name;
+            $query->where('prefecture_id', $prefecture_id);
+        }
+
+        $articles = $query->orderBy('created_at', 'desc')->paginate(10);
+        return view('articles.index', compact('articles', 'header', 'prefectures', 'categories'));
     }
 }

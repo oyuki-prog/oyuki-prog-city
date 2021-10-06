@@ -24,7 +24,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-fixed w-100 left-0 top-0">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Sumeba
@@ -41,11 +41,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('articles.index') }}">
-                            <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="{{ __('Keyword') }}">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                        </form>
                         @guest
+                            <li class="nav-item d-inline-block mx-3">
+                                <a class="nav-link btn btn-outline-success text-success"
+                                    href="{{ route('articles.create') }}"><i
+                                        class="fas fa-edit"></i>{{ __('Create') }}</a>
+                            </li>
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

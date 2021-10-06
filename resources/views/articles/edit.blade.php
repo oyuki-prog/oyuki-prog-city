@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-    <div class="container py-3">
+    <div class="container pt-5">
 
-        <form action="{{ route('articles.update', $article) }}" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('articles.update', $article) }}" enctype="multipart/form-data" method="POST" class="pt-5">
             @csrf
             @method('PATCH')
             <div class="form-group d-flex align-items-center">

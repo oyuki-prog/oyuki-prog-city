@@ -3,9 +3,9 @@
 @section('title', ' | 新規記事作成')
 
 @section('content')
-    <div class="container py-3">
+    <div class="container pt-5">
 
-        <form action="{{ route('articles.store') }}" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('articles.store') }}" enctype="multipart/form-data" method="POST" class="pt-5">
             @csrf
             <div class="form-group d-flex align-items-center">
                 <label for="title" class="mb-0 w-25">タイトル</label>

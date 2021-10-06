@@ -7,7 +7,17 @@
 @endsection
 
 @section('content')
-    <div class="container mt-3">
+@include('partial.search')
+<div class="container mt-3">
+        @if (!empty($header))
+            <h3 class="d-block mb-3">{{ $header }}の記事一覧</h3>
+        @endif
+        @if (!empty($keyword))
+            <h3 class="d-block mb-3">{{ $keyword }}を含む記事一覧</h3>
+        @endif
+        @if ($articles->total == 0)
+            <h2>該当する記事はありません</h2>
+        @endif
         @foreach ($articles as $article)
             <div class="mb-3 shadow d-flex align-items-center">
                 <div class="img-area">
@@ -33,11 +43,17 @@
                         <a class="d-block py-2" href="{{ route('articles.show', $article) }}">{{ $article->title }}</a>
                     </div>
                     <p class="mb-1 d-inline-block">
-                        場所：{{ $article->prefecture->name }}
-                        {{ $article->city_name }}
+                        場所：
+                        <a href="{{ route('area', [$article->prefecture_id, 1]) }}">
+                            {{ $article->prefecture->name }}
+                        </a>
+                        <a href="{{ route('area', [$article->prefecture_id, $article->city_name]) }}">
+                            {{ $article->city_name }}
+                        </a>
                     </p>
                     <p>
-                        カテゴリー：{{ $article->category->name }}
+                        カテゴリー：
+                        <a href="{{ route('category', $article->category_id) }}">{{ $article->category->name }}</a>
                     </p>
                 </div>
             </div>

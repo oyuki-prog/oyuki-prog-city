@@ -8,6 +8,7 @@
         .wallpaper {
             background: no-repeat url({{ $url }}) center center/cover;
             height: 100%;
+            padding-top: 70px;
         }
     </style>
 @endsection
