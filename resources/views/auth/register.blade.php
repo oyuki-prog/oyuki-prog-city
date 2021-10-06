@@ -76,6 +76,7 @@
                         <div class="form-group row">
                             <div class="d-flex col-md-5 align-items-center">
                                 <label for="prefecture_id" class="col-md-9 col-form-label text-md-right">{{ __('Prefecture of origin') }}</label>
+                                <div class="col-md-3 text-center required">必須</div>
                             </div>
                             <div class="col-md-6">
                                 <select name="prefecture_id" id="prefecture_id" class="form-control">

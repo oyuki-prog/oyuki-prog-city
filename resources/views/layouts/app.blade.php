@@ -70,6 +70,7 @@
                             </a>
                             <li class="nav-item dropdown">
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('user.show', Auth::id()) }}">マイページ</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

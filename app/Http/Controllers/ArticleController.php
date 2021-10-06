@@ -34,6 +34,9 @@ class ArticleController extends Controller
                 ->orWhere('city_name', 'like', $keyword . '%')
                 ->orWhereHas('prefecture', function ($query) use ($keyword) {
                     $query->where('name', 'like', $keyword . '%');
+                })
+                ->orWhereHas('category', function ($query) use ($keyword) {
+                    $query->where('name', 'like', '%' . $keyword . '%');
                 });
             $articles = $query->orderBy('created_at', 'desc')->paginate(10);
             return view('articles.index', compact('articles', 'keyword', 'prefectures', 'categories'));

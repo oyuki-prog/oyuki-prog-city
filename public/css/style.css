@@ -67,3 +67,28 @@
     border-radius: 100%;
     object-fit: cover;
 }
+
+textarea {
+    height: 300px;
+}
+
+.icon-form {
+    position: absolute;
+    top: 350px;
+    z-index: 1;
+
+}
+
+.file {
+    width: 200px;
+    display: block;
+}
+
+.self-intro {
+    font-size: 22px;
+    word-wrap: break-word;
+}
+
+.margin {
+    margin-top: 200px !important;
+}

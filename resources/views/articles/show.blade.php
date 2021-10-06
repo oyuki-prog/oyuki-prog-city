@@ -22,7 +22,7 @@
                         @if ($article->user->avatar_path)
                             <img src="{{ Storage::url($article->user->avatar_path) }}" class="avatar">
                         @endif
-                        <a class="font-weight-bold d-inline-block pr-2" href="">{{ $article->user->name }}</a>が
+                        <a class="font-weight-bold d-inline-block pr-2" href="{{ route('user.show', $article->user) }}">{{ $article->user->name }}</a>が
                         @if ($article->created_at == $article->updated_at)
                             {{ date('Y年n月j日', strtotime($article->created_at)) }}に作成
                         @else
