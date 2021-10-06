@@ -21,12 +21,9 @@ Route::get('/', [ArticleController::class, 'index'])->name('root');
 
 Auth::routes();
 
-
 Route::get('/articles/create', [ArticleController::class, 'create'])->middleware('auth')->name('articles.create');
 
 Route::resource('articles', ArticleController::class)->except('create');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/category/{id}', [ArticleController::class, 'category'])->name('category');
 

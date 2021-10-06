@@ -65,7 +65,6 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
         $article = new Article();
         $article->fill($request->all());
 
@@ -121,8 +120,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        $user = Auth::user();
-        if ($user->id != $article->user_id) {
+        if (Auth::id() != $article->user_id) {
             return redirect()->route('articles.index');
         }
 
@@ -211,7 +209,7 @@ class ArticleController extends Controller
         $query = Article::query();
         $prefecture = Prefecture::find($prefecture_id);
 
-        if ($city_name != 1){
+        if ($city_name != 'empty'){
             $header = $prefecture->name . ' ' . $city_name;
             $query->where('prefecture_id', $prefecture_id)
             ->where('city_name', 'like', $city_name . '%');
