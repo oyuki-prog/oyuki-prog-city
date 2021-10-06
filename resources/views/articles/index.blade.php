@@ -20,11 +20,11 @@
         @endif
         @foreach ($articles as $article)
             <div class="mb-3 shadow d-flex align-items-center">
-                <div class="img-area">
+                <div class="img-area d-flex justify-content-center align-items-center">
                     @if ($article->bg_img_path)
                         <img src="{{ Storage::url($article->bg_img_path) }}" class="main-img">
                     @else
-                        <p class="align-middle h-100 d-inline-block">画像なし</p>
+                        <p class="mb-0">画像なし</p>
                     @endif
                 </div>
                 <div class="w-75 pl-3 align-middle">

@@ -14,6 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $files = Storage::allFiles('public');
+        Storage::delete($files);
+
+        $directories = Storage::allDirectories('public');
+        foreach ($directories as $directory) {
+            Storage::deleteDirectory($directory);
+        }
+
         $this->call([
             CategorySeeder::class,
             PrefectureSeeder::class

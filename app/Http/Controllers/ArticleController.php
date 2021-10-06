@@ -64,17 +64,18 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
         $article = new Article();
+        $article->fill($request->all());
 
         //メイン画像の保存処理
-        if ($file = $request->bg_img_path) {
+        if ($request->bg_img_path) {
+            $file = $request->bg_img_path;
             $fileName = time() . $file->getClientOriginalName();
             $target_path = storage_path('app/public/bg_image');
             $file->move($target_path, $fileName);
             $article->bg_img_path ='bg_image/' . $fileName;
         }
 
-        $article->fill($request->all());
-        $article->user_id = $user->id;
+        $article->user_id = Auth::id();
         $article->save();
 
         //画像リストの保存処理
