@@ -33,11 +33,17 @@
                         {{ $article->title }}
                     </div>
                     <p class="mb-1 d-inline-block">
-                        場所：{{ $article->prefecture->name }}
-                        {{ $article->city_name }}
+                        場所：
+                        <a href="{{ route('area', [$article->prefecture_id, 1]) }}">
+                            {{ $article->prefecture->name }}
+                        </a>
+                        <a href="{{ route('area', [$article->prefecture_id, $article->city_name]) }}">
+                            {{ $article->city_name }}
+                        </a>
                     </p>
                     <p>
-                        カテゴリー：{{ $article->category->name }}
+                        カテゴリー：
+                        <a href="{{ route('category', $article->category_id) }}">{{ $article->category->name }}</a>
                     </p>
                 </div>
             </div>

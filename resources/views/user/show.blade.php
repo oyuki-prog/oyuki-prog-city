@@ -1,25 +1,37 @@
 @extends('layouts.app')
 
-@section('title', ' | 記事一覧')
+@section('title', ' | ' . $user->name)
 
 @section('style')
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection
 
 @section('content')
-@include('partial.search')
-<div class="container mt-3">
-        @if (!empty($header))
-            <h3 class="d-block mb-3">{{ $header }}の記事一覧</h3>
-        @endif
-        @if (!empty($keyword))
-            <h3 class="d-block mb-3">{{ $keyword }}を含む記事一覧</h3>
-        @endif
-        @if ($articles->total == 0)
-            <h2>該当する記事はありません</h2>
-        @endif
-        @foreach ($articles as $article)
-            <div class="mb-3 shadow d-flex align-items-center">
+    <div class="container pt-5">
+        <div class="pt-5 d-flex">
+            <div class="icon-area d-flex align-items-center justify-content-center">
+                @if ($user->avatar_path)
+                    <img src="{{ Storage::url($user->avatar_path) }}" class="icon">
+                @else
+                    <p class="mb-0 d-block font-weight-bolder w-100 h-100 bg-gray">No Image</p>
+                @endif
+            </div>
+            <div class="ml-5 w-75">
+                <p class="h3 d-block mb-3 font-weight-bolder">{{ $user->name }}</p>
+                @if ($user->prefecture_id)
+                    <p class="h4 d-block mb-3">{{ $user->prefecture->name }}出身</p>
+                @endif
+                <p class="h4 d-block mb-3">自己紹介</p>
+                @if ($user->self_intro)
+                    <p class="m-0">{!! nl2br(e($user->self_intro)) !!}</p>
+                @endif
+            </div>
+        </div>
+
+        @if (!empty($user->articles))
+            <p class="h3 d-block mt-5">{{ $user->name }} さんの記事一覧</p>
+            @foreach ($user->articles as $article)
+        <div class="mb-3 shadow d-flex align-items-center">
                 <div class="img-area d-flex justify-content-center align-items-center">
                     @if ($article->bg_img_path)
                         <img src="{{ Storage::url($article->bg_img_path) }}" class="main-img">
@@ -57,9 +69,9 @@
                     </p>
                 </div>
             </div>
-        @endforeach
-    </div>
-    <div class="d-flex justify-content-center">
-        {{ $articles->links() }}
+            @endforeach
+        @else
+            <p>{{ $user->name }} さんはまだ記事を投稿していません</p>
+        @endif
     </div>
 @endsection
