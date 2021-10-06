@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UserController;
+use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ArticleController::class, 'index'])->name('root');
+
+Auth::routes();
+
+Route::get('/articles/create', [ArticleController::class, 'create'])->middleware('auth')->name('articles.create');
+
+Route::resource('articles', ArticleController::class)->except('create');
+
+Route::get('/category/{id}', [ArticleController::class, 'category'])->name('category');
+
+Route::get('/area/{prefecture_id}/{city_name}', [ArticleController::class, 'area'])->name('area');
+
+Route::resource('user', UserController::class)->only('show', 'edit', 'update', 'destroy');

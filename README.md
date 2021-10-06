@@ -1,64 +1,56 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Sumeba ― 我が街自慢サイト
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About This App
+* 自分の街の自慢ができるアプリ
 
-## About Laravel
+## テーブル定義
+* 県名テーブル･･･県名
+* カテゴリーテーブル･･･カテゴリー名
+* 記事テーブル･･･記事情報
+* ユーザーテーブル･･･ユーザー情報
+* イメージテーブル･･･記事に添付する画像パス
+https://docs.google.com/spreadsheets/d/1X0cjk493kWx-3MrJRX8Xl4ieKYd9baKEe6p3OPlFIZw/edit#gid=0
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 実装機能
+* CRUD
+  * 記事情報のCRUD機能
+  * ユーザー情報のCRUD機能
+* 検索
+  * フリーワード検索
+  * タイトル、本文、県名、市町村名から検索
+* ファイルアップロード
+  * メイン画像、記事画像、ユーザーアイコンを登録可能
+  * 記事削除の際にストレージから画像削除
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 工夫した点
+* カテゴリー、地名リンク
+  * 記事のカテゴリーや地名をクリックすると、絞り込んだ結果を表示
+* 詳細画面
+  * メイン画像を背景として表示
+  * 記事画像を複数アップロードし、表示できるようにした
+* ユーザーページ
+  * ユーザーアイコンのプレビュー機能
+  * ユーザーの記事一覧を表示
+* ユーザー認証
+  * 記事の投稿は登録ユーザーでないとできない
+  * 編集、削除は自分の記事のときのみ表示
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 画面
 
-## Learning Laravel
+### 一覧画面
+<img width="1680" alt="スクリーンショット 2021-10-06 22 29 23" src="https://user-images.githubusercontent.com/89429515/136211970-69c914b1-6cf3-4d56-9306-ad7e36f9ae13.png">
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 検索後画面
+<img width="1679" alt="スクリーンショット 2021-10-06 22 25 52" src="https://user-images.githubusercontent.com/89429515/136211759-b9ba9353-666f-4f5d-bac8-93ffa4010d0a.png">
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 投稿画面
+<img width="842" alt="スクリーンショット 2021-10-06 22 20 01" src="https://user-images.githubusercontent.com/89429515/136212091-2ecafe0d-9209-40b5-8b0f-24e8aa891cb2.png">
 
-## Laravel Sponsors
+### 詳細画面
+<img width="1680" alt="スクリーンショット 2021-10-06 22 20 40" src="https://user-images.githubusercontent.com/89429515/136212315-e50ff2e1-6cd0-4dcb-9ad9-edc54f8957a7.png">
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 編集画面
+<img width="1680" alt="スクリーンショット 2021-10-06 22 25 24" src="https://user-images.githubusercontent.com/89429515/136212180-eec2889e-6e59-4995-b140-b006f3129556.png">
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### ユーザーページ
+<img width="1680" alt="スクリーンショット 2021-10-06 22 24 23" src="https://user-images.githubusercontent.com/89429515/136212475-195c564f-0d37-4b33-b658-b58a88fd188f.png">

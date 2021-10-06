@@ -1,0 +1,23 @@
+{
+    "Create" : "投稿",
+    "Login" : "ログイン",
+    "Register" : "登録",
+    "Logout" : "ログアウト",
+    "Verify Your Email Address" : "メールアドレスの確認",
+    "A fresh verification link has been sent to your email address." : "あなたのメールアドレスに新しい検証リンクが送信されました",
+    "Before proceeding, please check your email for a verification link." : "先に進む前に、確認用のリンクをメールで確認してください。",
+    "If you did not receive the email" : "メールが届いてない方",
+    "click here to request another" : "お問い合わせはこちら",
+    "Name" : "名前",
+    "E-Mail Address" : "メールアドレス",
+    "Password" : "パスワード",
+    "Confirm Password" : "パスワード再入力",
+    "Prefecture of origin" : "出身県",
+    "Remember Me" : "アドレスを記憶する",
+    "Forgot Your Password?" : "パスワードを忘れた場合",
+    "Reset Password" : "パスワードの再設定",
+    "Send Password Reset Link" : "パスワード再設定用のリンクを送信",
+    "Please confirm your password before continuing." : "続ける前にパスワードを確認してください",
+    "Keyword" : "タイトル、本文、県名、市町村名からフリーワード検索",
+    "Search" : "検索"
+}
